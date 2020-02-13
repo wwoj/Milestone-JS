@@ -1,0 +1,71 @@
+.red {
+  background-color: red;
+}
+.green {
+  background-color: green;
+}
+.blue {
+  background-color: blue;
+ 
+}
+
+.div-picture {
+  height: 200px;
+  width: 25%;
+  min-width: 150px;
+  background-size:cover ;
+}
+.film-preview {
+  border: 2px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.film-info {
+  height: 200px;
+  width: 75%;
+  background-color: lawngreen;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  position: relative;
+
+}
+.film-title {
+  height: 20px;
+  width: 100%;
+  background-color: lemonchiffon;
+}
+.film-year {
+  height: 20px;
+  width: 100%;
+  background-color: rgb(206, 0, 0);
+}
+.film-rate {
+  height: 20px;
+  width: 100%;
+  background-color: rgb(5, 71, 255);
+}
+#baseContainer {
+  max-width: 800px;
+  background-color: purple;
+  margin-left: auto;
+  margin-right: auto;
+}
+#navContainer{
+    max-width: 800px;
+    background-color: purple;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+}
+.nav-button{
+    width: 25%;
+}
+.button-delete{
+    position: absolute;
+    top: 0;
+    right: 0;
+    visibility: hidden;
+}

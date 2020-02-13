@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Filmweb Kamień milowy</title>
+    <link rel="icon" href="https://1.fwcdn.pl/an/np/49468/2018/15037.7.jpg" />
+    <link type="text/css" rel="stylesheet" href="./main.css" />
+    <script src="./main.js"></script>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> -->
+  </head>
+  <body>
+    <section id="serachSection">
+      <nav>
+        <div id="navContainer">
+          <button id="navBtnFilmweb" class="nav-button">Filmweb 2.0</button>
+          <button id="navBtnFind" class="nav-button">Find film</button>
+          <button id="navBtnAdd" class="nav-button">Add Film</button>
+          <button id="navBtnDelete" class="nav-button">Delete Film</button>
+          <button id="navBtnSort" class="nav-button">Sorting</button>
+        </div>
+        <!-- <label id="filmNameLabel">Film name:</label><input type="text" id="titleInput">
+    <label id="productionYearLabel">Production year:</label><input id="yearInput" type="text">
+    <label id="rateLabel">Rate:</label><input id="rateInput" type="number" min="0" max="5" step="0.1">
+    <label id="imgLabel">IMG:</label><input type="text" id="imgInput"> -->
+        <!-- <button id="addButton">Add film</button> -->
+      </nav>
+      <div>
+        <form id="addForm">
+          <label>Tytuł <input type="text" id="addFilmTitle"/></label>
+          <label>Rok <input type="number" id="addFilmYear"/></label>
+          <label>Ocena <input type="number" id="addFilmRate"/></label>
+          <label>Obrazek <input type="text" id="addFilmPicture"/></label>
+          <button id="addButton">Add film to base</button>
+        </form>
+      </div>
+    </section>
+    <section>
+      <button >Dodaj diva</button>
+      <h1>FwebFilm</h1>
+      <div id="baseContainer"></div>
+    </section>
+  </body>
+</html>
