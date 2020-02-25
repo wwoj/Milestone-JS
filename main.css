@@ -67,5 +67,46 @@
     position: absolute;
     top: 0;
     right: 0;
-    visibility: hidden;
+    visibility:hidden;
+}
+.button-update{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  visibility: hidden;
+}
+#filmPoster{
+  height: 300px;
+  width: 300px;
+  background-image: url("https://pbs.twimg.com/profile_images/1183667155759521793/8uLfpE8l_400x400.jpg");
+  background-size: cover;
+}
+#sectionDetails{
+  /* visibility: hidden; */
+  display: flex;
+  position: fixed;
+  right: 0;
+  top: 0;
+   flex-wrap: wrap;
+ width: 40%;;
+  
+  z-index: 21;
+}
+#filmDescription{
+  background-color: aqua;
+  width: 60%;;
+}
+#kwadrat
+{
+  width: 100px;
+  height: 100px;
+  display: flex;
+  position: absolute;
+  right: 0;
+  
+  background-color: red;
+}
+#serachSection{
+
+  position: relative;
 }

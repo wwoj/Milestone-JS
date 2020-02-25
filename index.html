@@ -20,6 +20,7 @@
           <button id="navBtnAdd" class="nav-button">Add Film</button>
           <button id="navBtnDelete" class="nav-button">Delete Film</button>
           <button id="navBtnSort" class="nav-button">Sorting</button>
+          <button id="navBtnUpdate" class="nav-button">Update</button>
         </div>
         <!-- <label id="filmNameLabel">Film name:</label><input type="text" id="titleInput">
     <label id="productionYearLabel">Production year:</label><input id="yearInput" type="text">
@@ -27,6 +28,18 @@
     <label id="imgLabel">IMG:</label><input type="text" id="imgInput"> -->
         <!-- <button id="addButton">Add film</button> -->
       </nav>
+      <section id="sectionDetails">
+        <div id="mainInfo">
+        <div id="filmPoster"></div>
+         <h1 id="hTitle"></h1>
+         <h2 id="hYear"></h1>
+         <h2 id="hRate"></h1>
+         </div>
+         <div id="filmDescription">
+         <div id="cast"></div>
+         <div id="description"></div>
+        </div>
+       </section>
       <div>
         <form id="addForm">
           <label>Tytuł <input type="text" id="addFilmTitle"/></label>
@@ -36,11 +49,26 @@
           <button id="addButton">Add film to base</button>
         </form>
       </div>
-    </section>
+      <div>
+        <form id="upForm">
+          <label>Tytuł <input type="text" id="upFilmTitle"/></label>
+          <label>Rok <input type="number" id="upFilmYear"/></label>
+          <label>Ocena <input type="number" id="upFilmRate"/></label>
+          <label>Obrazek <input type="text" id="upFilmPicture"/></label>
+          <button id="upButton">Add film to base</button>
+        </form>
+      </div>
+
+
+
     <section>
       <button >Dodaj diva</button>
       <h1>FwebFilm</h1>
       <div id="baseContainer"></div>
     </section>
+
+    <div id="sectionDetails"></div>
+  </section>
+
   </body>
 </html>
