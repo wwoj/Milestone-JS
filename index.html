@@ -10,25 +10,62 @@
     <script src="./main.js"></script>
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </head>
   <body>
     <section id="serachSection">
       <nav>
         <div id="navContainer">
-          <button id="navBtnFilmweb" class="nav-button">Filmweb 2.0</button>
-          <button id="navBtnFind" class="nav-button">Find film</button>
-          <button id="navBtnAdd" class="nav-button">Add Film</button>
-          <button id="navBtnDelete" class="nav-button">Delete Film</button>
-          <button id="navBtnSort" class="nav-button">Sorting</button>
-          <button id="navBtnUpdate" class="nav-button">Update</button>
+          <button id="navBtnFilmweb" class="nav-button btn btn-dark">Filmweb 2.0</button>
+          <button id="navBtnFind" class="nav-button btn btn-dark">Find film</button>
+          <button id="navBtnAdd" class="nav-button btn btn-dark">Add Film</button>
+          <button id="navBtnDelete" class="nav-button btn btn-dark">Delete Film</button>
+          <button id="navBtnSort" class="nav-button btn btn-dark">Sorting</button>
+          <button id="navBtnUpdate" class="nav-button btn btn-dark">Update</button>
         </div>
         <!-- <label id="filmNameLabel">Film name:</label><input type="text" id="titleInput">
     <label id="productionYearLabel">Production year:</label><input id="yearInput" type="text">
     <label id="rateLabel">Rate:</label><input id="rateInput" type="number" min="0" max="5" step="0.1">
     <label id="imgLabel">IMG:</label><input type="text" id="imgInput"> -->
         <!-- <button id="addButton">Add film</button> -->
+
+        
       </nav>
-      <section id="sectionDetails">
+
+      
+      
+      
+      <section id="filmsContainer">
+        <div id="inputDiv" class="sizeItem">
+          <div id="addDiv">
+          <form id="addForm">
+            <label>Title <input type="text" id="addFilmTitle"/></label>
+            <label>Year <input type="number" id="addFilmYear"/></label>
+            <label>Rate <input type="number" id="addFilmRate" step="0.01"/></label>
+            <label>Poster <input type="text" id="addFilmPicture"/></label>
+            <button id="addButton" class="btn btn-dark">Add film to base</button>
+          </form>
+        </div>
+        <div id="updDiv">
+          <form id="upForm">
+            <label>Title <input type="text" id="upFilmTitle"/></label>
+            <label>Year <input type="number" id="upFilmYear"/></label>
+            <label>Rate <input type="number" id="upFilmRate" step="0.01"/></label>
+            <label>Poster <input type="text" id="upFilmPicture"/></label>
+            <button id="upButton" class="btn btn-dark">Update Film</button>
+          </form>
+        </div>
+        <div id="searchInputDiv">
+        <Label id="searchLabel">Provide title</Label>
+        <input type="text" id="searchFilm">
+      </div>
+        </div>
+
+      <div id="baseContainer" class="sizeItem"></div>
+      <div id="sectionDetails">
         <div id="mainInfo">
         <div id="filmPoster"></div>
          <h1 id="hTitle"></h1>
@@ -38,36 +75,11 @@
          <div id="filmDescription">
          <div id="cast"></div>
          <div id="description"></div>
+         <button id="closePopUp" class="btn btn-dark">Close</button>
         </div>
-       </section>
-      <div>
-        <form id="addForm">
-          <label>Tytuł <input type="text" id="addFilmTitle"/></label>
-          <label>Rok <input type="number" id="addFilmYear"/></label>
-          <label>Ocena <input type="number" id="addFilmRate"/></label>
-          <label>Obrazek <input type="text" id="addFilmPicture"/></label>
-          <button id="addButton">Add film to base</button>
-        </form>
       </div>
-      <div>
-        <form id="upForm">
-          <label>Tytuł <input type="text" id="upFilmTitle"/></label>
-          <label>Rok <input type="number" id="upFilmYear"/></label>
-          <label>Ocena <input type="number" id="upFilmRate"/></label>
-          <label>Obrazek <input type="text" id="upFilmPicture"/></label>
-          <button id="upButton">Add film to base</button>
-        </form>
-      </div>
-
-
-
-    <section>
-      <button >Dodaj diva</button>
-      <h1>FwebFilm</h1>
-      <div id="baseContainer"></div>
     </section>
 
-    <div id="sectionDetails"></div>
   </section>
 
   </body>

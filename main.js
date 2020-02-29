@@ -25,6 +25,16 @@ let hRate;
 let cast;
 let description;
 
+let updDiv;
+let addDiv;
+let navBtnAdd;
+
+let searchFilm;
+let navBtnFind;
+let searchInputDiv;
+
+let closePopUp;
+
 const MOVIES_url =
   "https://us-central1-itfighters-movies.cloudfunctions.net/api/movie";
 let UPD_URL;
@@ -46,6 +56,7 @@ window.onload = () => {
       addFilmRate.value,
       addFilmPicture.value
     );
+    updDiv.style.visibility="hidden";
   });
   upButton.addEventListener("click", () => {
     upDateFilm(
@@ -55,10 +66,26 @@ window.onload = () => {
       upFilmPicture.value
     );
   });
+  let addChecked = false;
+  navBtnAdd.addEventListener("click",()=>{
+    
+    if (addChecked) {
+      addChecked = false;
+      addDiv.style.visibility = "hidden";
+    } else {
+      addChecked = true;
+      addDiv.style.visibility="visible";
+    }
+    findChecked=false;
+    searchInputDiv.style.visibility="hidden"
+    updateChecked = false;
+    updDiv.style.visibility="hidden";
+  })
   let deleteChecked = false;
   navBtnDelete.addEventListener("click", () => {
     let visibilityVal;
     let deleteBtns = document.getElementsByClassName("button-delete");
+    let updateBtns = document.getElementsByClassName("button-update");
     if (deleteChecked) {
       deleteChecked = false;
       visibilityVal = "hidden";
@@ -69,15 +96,50 @@ window.onload = () => {
 
     for (let i = 0; i < deleteBtns.length; i++) {
       deleteBtns[i].style.visibility = visibilityVal;
+      updateBtns[i].style.visibility = "hidden";
+      
     }
+    updateChecked= false;
+    
   });
+  /////
+  let findChecked = false;
+  navBtnFind.addEventListener("click", () => {
+    let deleteBtns = document.getElementsByClassName("button-delete");
+    let updateBtns = document.getElementsByClassName("button-update");
+    if (findChecked) {
+      findChecked = false;
+      searchInputDiv.style.visibility="hidden";
+    } else {
+      findChecked = true;
+      searchInputDiv.style.visibility="visible";
+    }
+
+    for (let i = 0; i < deleteBtns.length; i++) {
+      deleteBtns[i].style.visibility = "hidden";
+      updateBtns[i].style.visibility = "hidden";
+      
+    }
+    updateChecked = false;
+    updDiv.style.visibility="hidden";
+  
+    addDiv.style.visibility = "hidden";
+    
+  });
+
+  closePopUp.addEventListener("click",()=>{
+    sectionDetails.style.visibility = "hidden";
+  });
+  //////
   let updateChecked = false;
   navBtnUpdate.addEventListener("click", () => {
+    console.log(updateChecked);
     let visibilityVal;
+    let deleteBtns = document.getElementsByClassName("button-delete");
     let updateBtns = document.getElementsByClassName("button-update");
     if (updateChecked) {
       updateChecked = false;
-
+      updDiv.style.visibility="hidden";
       visibilityVal = "hidden";
     } else {
       updateChecked = true;
@@ -87,8 +149,17 @@ window.onload = () => {
 
     for (let i = 0; i < updateBtns.length; i++) {
       updateBtns[i].style.visibility = visibilityVal;
+      deleteBtns[i].style.visibility = "hidden";
     }
+    deleteChecked= false;
+    findChecked=false;
+    searchInputDiv.style.visibility="hidden"
   });
+  searchFilm.addEventListener("input",()=>{
+
+    searchFilms(searchFilm.value);
+  })
+  
 };
 
 function connectToSever() {
@@ -98,7 +169,7 @@ function connectToSever() {
     })
     .then(jsresp => {
       moviesArray = jsresp;
-      console.log(moviesArray);
+      
       moviesArray.sort((a, b) => (a.title > b.title ? 1 : -1));
       moviesArray.forEach(element => {
         createDivList(
@@ -108,9 +179,7 @@ function connectToSever() {
           element.rate,
           element.id
         );
-        //checkIMGURL(element.imgSrc);
-        console.log("na zewnatrz", element.imgSrc);
-        //console.log(element.imgSrc)
+        
       });
     })
     .catch(error => {
@@ -124,7 +193,7 @@ function createDivList(imgUrl, title, year, rate, id) {
   divFilmPreview.setAttribute("class", "film-preview blue");
   //Create div for picture
   let divPic = document.createElement("div");
-  divPic.setAttribute("class", "div-picture red");
+  divPic.setAttribute("class", "div-picture black");
   //console.log(imgUrl);
   let tempIMG;
   fetch(imgUrl)
@@ -140,7 +209,7 @@ function createDivList(imgUrl, title, year, rate, id) {
     })
     .catch(err => {
       console.log(
-        "tutaj jestes poza wszystkim https://applian.com/img/oops.png"
+        "error fetch"
       );
     });
 
@@ -166,7 +235,7 @@ function createDivList(imgUrl, title, year, rate, id) {
   //let deleteButton = createDeleteButton(id);
   let deletebutton = document.createElement("button");
   deletebutton.innerText = "Delete Item ";
-  deletebutton.setAttribute("class", "button-delete");
+  deletebutton.setAttribute("class", "button-delete btn btn-dark");
   deletebutton.addEventListener("click", () => {
     fetch(MOVIES_url + "/" + id, {
       method: "DELETE"
@@ -176,17 +245,20 @@ function createDivList(imgUrl, title, year, rate, id) {
         refreshDiv();
       })
       .catch(err => {
-        console.log("Nie dziala");
+        alert("Item not deleted, fetch error.");
       });
   });
   let updateButton = document.createElement("button");
   updateButton.innerText = "Update Item ";
-  updateButton.setAttribute("class", "button-update");
+  updateButton.setAttribute("class", "button-update btn btn-dark");
   updateButton.onclick = function(e) {
     let objID = e.target.parentNode.parentNode.id;
     UPD_URL = MOVIES_url + "/" + objID;
     alert(UPD_URL);
     copyUpData();
+    updDiv.style.visibility="visible";
+    findChecked=false;
+    searchInputDiv.style.visibility="hidden"
   };
   divFilmInfo.appendChild(filmTitle);
   divFilmInfo.appendChild(filmYear);
@@ -225,6 +297,15 @@ function getDOM() {
   hRate = document.getElementById("hRate");
   cast = document.getElementById("cast");
   description = document.getElementById("description");
+
+  updDiv = document.getElementById("updDiv");
+  addDiv = document.getElementById("addDiv");
+  navBtnAdd = document.getElementById("navBtnAdd");
+
+  searchFilm=document.getElementById("searchFilm");
+  navBtnFind=document.getElementById("navBtnFind");
+  searchInputDiv=document.getElementById("searchInputDiv");
+  closePopUp=document.getElementById("closePopUp");
 }
 
 function addfilm(titleIn, yearIn, rateIn, pictureIn) {
@@ -283,7 +364,7 @@ function upDateFilm(titleN, yearN, rateN, imgSrcN) {
     });
 }
 function copyUpData() {
-  console.log(UPD_URL);
+  
   fetch(UPD_URL)
     .then(element => {
       return element.json();
@@ -315,7 +396,7 @@ function searchDetails() {
       })
       .catch(err => {
         console.log(
-          "tutaj jestes poza wszystkim https://applian.com/img/oops.png"
+          "error fetch"
         );
       });
        hTitle.innerText=elem.title;
@@ -324,4 +405,28 @@ function searchDetails() {
        cast.innerText=elem.cast;
        description.innerText=elem.description;
     });
+}
+
+
+function searchFilms(text)
+{
+  let searchedTitles =  moviesArray.filter((elem)=>{
+    let tempSearchTitle= text.toLowerCase(); 
+    let arayCurrentTitle = elem.title.toLowerCase();
+    if( arayCurrentTitle.includes(tempSearchTitle))
+    {
+      return elem;
+    }
+  });
+  baseContainer.innerHTML = "";
+  searchedTitles.forEach(element => {
+    createDivList(
+      element.imgSrc,
+      element.title,
+      element.year,
+      element.rate,
+      element.id
+    );
+
+});
 }
