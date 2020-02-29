@@ -32,8 +32,14 @@ let navBtnAdd;
 let searchFilm;
 let navBtnFind;
 let searchInputDiv;
+let navBtnSort;
 
 let closePopUp;
+
+let rateUP;
+let rateDown;
+let yearUP;
+let yearDown;
 
 const MOVIES_url =
   "https://us-central1-itfighters-movies.cloudfunctions.net/api/movie";
@@ -42,7 +48,7 @@ let moviesArray = [];
 window.onload = () => {
   getDOM();
   connectToSever();
-
+  addEventSortBtn();
   addForm.onsubmit = elem => {
     elem.preventDefault();
   };
@@ -56,7 +62,7 @@ window.onload = () => {
       addFilmRate.value,
       addFilmPicture.value
     );
-    updDiv.style.visibility="hidden";
+    updDiv.style.visibility = "hidden";
   });
   upButton.addEventListener("click", () => {
     upDateFilm(
@@ -67,20 +73,19 @@ window.onload = () => {
     );
   });
   let addChecked = false;
-  navBtnAdd.addEventListener("click",()=>{
-    
+  navBtnAdd.addEventListener("click", () => {
     if (addChecked) {
       addChecked = false;
       addDiv.style.visibility = "hidden";
     } else {
       addChecked = true;
-      addDiv.style.visibility="visible";
+      addDiv.style.visibility = "visible";
     }
-    findChecked=false;
-    searchInputDiv.style.visibility="hidden"
+    findChecked = false;
+    searchInputDiv.style.visibility = "hidden";
     updateChecked = false;
-    updDiv.style.visibility="hidden";
-  })
+    updDiv.style.visibility = "hidden";
+  });
   let deleteChecked = false;
   navBtnDelete.addEventListener("click", () => {
     let visibilityVal;
@@ -97,10 +102,8 @@ window.onload = () => {
     for (let i = 0; i < deleteBtns.length; i++) {
       deleteBtns[i].style.visibility = visibilityVal;
       updateBtns[i].style.visibility = "hidden";
-      
     }
-    updateChecked= false;
-    
+    updateChecked = false;
   });
   /////
   let findChecked = false;
@@ -109,25 +112,23 @@ window.onload = () => {
     let updateBtns = document.getElementsByClassName("button-update");
     if (findChecked) {
       findChecked = false;
-      searchInputDiv.style.visibility="hidden";
+      searchInputDiv.style.visibility = "hidden";
     } else {
       findChecked = true;
-      searchInputDiv.style.visibility="visible";
+      searchInputDiv.style.visibility = "visible";
     }
 
     for (let i = 0; i < deleteBtns.length; i++) {
       deleteBtns[i].style.visibility = "hidden";
       updateBtns[i].style.visibility = "hidden";
-      
     }
     updateChecked = false;
-    updDiv.style.visibility="hidden";
-  
+    updDiv.style.visibility = "hidden";
+
     addDiv.style.visibility = "hidden";
-    
   });
 
-  closePopUp.addEventListener("click",()=>{
+  closePopUp.addEventListener("click", () => {
     sectionDetails.style.visibility = "hidden";
   });
   //////
@@ -139,7 +140,7 @@ window.onload = () => {
     let updateBtns = document.getElementsByClassName("button-update");
     if (updateChecked) {
       updateChecked = false;
-      updDiv.style.visibility="hidden";
+      updDiv.style.visibility = "hidden";
       visibilityVal = "hidden";
     } else {
       updateChecked = true;
@@ -151,15 +152,17 @@ window.onload = () => {
       updateBtns[i].style.visibility = visibilityVal;
       deleteBtns[i].style.visibility = "hidden";
     }
-    deleteChecked= false;
-    findChecked=false;
-    searchInputDiv.style.visibility="hidden"
+    deleteChecked = false;
+    findChecked = false;
+    searchInputDiv.style.visibility = "hidden";
   });
-  searchFilm.addEventListener("input",()=>{
-
+  searchFilm.addEventListener("input", () => {
     searchFilms(searchFilm.value);
-  })
-  
+  });
+  navBtnSort.addEventListener("click", () => {
+    //alert("cosik")
+    //sortByRate();
+  });
 };
 
 function connectToSever() {
@@ -169,7 +172,7 @@ function connectToSever() {
     })
     .then(jsresp => {
       moviesArray = jsresp;
-      
+
       moviesArray.sort((a, b) => (a.title > b.title ? 1 : -1));
       moviesArray.forEach(element => {
         createDivList(
@@ -179,7 +182,6 @@ function connectToSever() {
           element.rate,
           element.id
         );
-        
       });
     })
     .catch(error => {
@@ -208,9 +210,7 @@ function createDivList(imgUrl, title, year, rate, id) {
       }
     })
     .catch(err => {
-      console.log(
-        "error fetch"
-      );
+      console.log("error fetch");
     });
 
   //create div for film info
@@ -223,7 +223,7 @@ function createDivList(imgUrl, title, year, rate, id) {
     let objID = e.target.parentNode.parentNode.id;
     UPD_URL = MOVIES_url + "/" + objID;
     alert("Film info");
-    sectionDetails.style.visibility="visible";
+    sectionDetails.style.visibility = "visible";
     searchDetails();
   });
   let filmRate = document.createElement("div");
@@ -256,9 +256,9 @@ function createDivList(imgUrl, title, year, rate, id) {
     UPD_URL = MOVIES_url + "/" + objID;
     alert(UPD_URL);
     copyUpData();
-    updDiv.style.visibility="visible";
-    findChecked=false;
-    searchInputDiv.style.visibility="hidden"
+    updDiv.style.visibility = "visible";
+    findChecked = false;
+    searchInputDiv.style.visibility = "hidden";
   };
   divFilmInfo.appendChild(filmTitle);
   divFilmInfo.appendChild(filmYear);
@@ -302,10 +302,18 @@ function getDOM() {
   addDiv = document.getElementById("addDiv");
   navBtnAdd = document.getElementById("navBtnAdd");
 
-  searchFilm=document.getElementById("searchFilm");
-  navBtnFind=document.getElementById("navBtnFind");
-  searchInputDiv=document.getElementById("searchInputDiv");
-  closePopUp=document.getElementById("closePopUp");
+  searchFilm = document.getElementById("searchFilm");
+  navBtnFind = document.getElementById("navBtnFind");
+  searchInputDiv = document.getElementById("searchInputDiv");
+  closePopUp = document.getElementById("closePopUp");
+  navBtnSort = document.getElementById("navBtnSort");
+
+  // sorting
+
+  rateUP = document.getElementById("rateUP")
+  rateDown = document.getElementById("rateDown");
+  yearUP = document.getElementById("yearUP");
+  yearDown = document.getElementById("yearDown");
 }
 
 function addfilm(titleIn, yearIn, rateIn, pictureIn) {
@@ -364,7 +372,6 @@ function upDateFilm(titleN, yearN, rateN, imgSrcN) {
     });
 }
 function copyUpData() {
-  
   fetch(UPD_URL)
     .then(element => {
       return element.json();
@@ -385,36 +392,31 @@ function searchDetails() {
     .then(elem => {
       let tempIMG;
       fetch(elem.imgSrc)
-      .then(res => {
-        if (res.ok) {
-          filmPoster.style.backgroundImage= `url("${elem.imgSrc}")`
-        } else {
-          tempIMG = "https://applian.com/img/oops.png";
-          alert(res.ok)
-          filmPoster.style.backgroundImage = `url("${tempIMG}")`;
-        }
-      })
-      .catch(err => {
-        console.log(
-          "error fetch"
-        );
-      });
-       hTitle.innerText=elem.title;
-       hYear.innerText=elem.year;
-       hRate.innerText=elem.rate;
-       cast.innerText=elem.cast;
-       description.innerText=elem.description;
+        .then(res => {
+          if (res.ok) {
+            filmPoster.style.backgroundImage = `url("${elem.imgSrc}")`;
+          } else {
+            tempIMG = "https://applian.com/img/oops.png";
+            alert(res.ok);
+            filmPoster.style.backgroundImage = `url("${tempIMG}")`;
+          }
+        })
+        .catch(err => {
+          console.log("error fetch");
+        });
+      hTitle.innerText = elem.title;
+      hYear.innerText = elem.year;
+      hRate.innerText = elem.rate;
+      cast.innerText = elem.cast;
+      description.innerText = elem.description;
     });
 }
 
-
-function searchFilms(text)
-{
-  let searchedTitles =  moviesArray.filter((elem)=>{
-    let tempSearchTitle= text.toLowerCase(); 
+function searchFilms(text) {
+  let searchedTitles = moviesArray.filter(elem => {
+    let tempSearchTitle = text.toLowerCase();
     let arayCurrentTitle = elem.title.toLowerCase();
-    if( arayCurrentTitle.includes(tempSearchTitle))
-    {
+    if (arayCurrentTitle.includes(tempSearchTitle)) {
       return elem;
     }
   });
@@ -427,6 +429,78 @@ function searchFilms(text)
       element.rate,
       element.id
     );
-
-});
+  });
 }
+
+function sortByRate() {
+  console.log(":adsa");
+  let newArray = moviesArray.sort((a, b) => (a.rate < b.rate ? 1 : -1));
+  console.log(newArray);
+}
+
+function addEventSortBtn()
+{
+  rateUP.addEventListener("click",sortRateUP);
+  yearUP.addEventListener("click",sortYearUP);
+  rateDown.addEventListener("click",sortRateDown);
+  yearDown.addEventListener("click",sortYearDown);
+
+}
+
+function sortRateUP()
+{
+  baseContainer.innerHTML = "";
+  let filmsRateUP = moviesArray.sort((a, b) => (a.rate < b.rate ? 1 : -1));
+  filmsRateUP.forEach(element => {
+    createDivList(
+      element.imgSrc,
+      element.title,
+      element.year,
+      element.rate,
+      element.id
+    );
+  });
+}
+function sortRateDown()
+{
+  baseContainer.innerHTML = "";
+  let filmsRateUP = moviesArray.sort((a, b) => (a.rate > b.rate ? 1 : -1));
+  filmsRateUP.forEach(element => {
+    createDivList(
+      element.imgSrc,
+      element.title,
+      element.year,
+      element.rate,
+      element.id
+    );
+  });
+}
+function sortYearUP()
+{
+  baseContainer.innerHTML = "";
+  let filmsRateUP = moviesArray.sort((a, b) => (a.year < b.year ? 1 : -1));
+  filmsRateUP.forEach(element => {
+    createDivList(
+      element.imgSrc,
+      element.title,
+      element.year,
+      element.rate,
+      element.id
+    );
+  });
+}
+function sortYearDown()
+{
+  baseContainer.innerHTML = "";
+  let filmsRateUP = moviesArray.sort((a, b) => (a.year > b.year ? 1 : -1));
+  filmsRateUP.forEach(element => {
+    createDivList(
+      element.imgSrc,
+      element.title,
+      element.year,
+      element.rate,
+      element.id
+    );
+  });
+}
+

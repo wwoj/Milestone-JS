@@ -23,8 +23,17 @@
           <button id="navBtnFind" class="nav-button btn btn-dark">Find film</button>
           <button id="navBtnAdd" class="nav-button btn btn-dark">Add Film</button>
           <button id="navBtnDelete" class="nav-button btn btn-dark">Delete Film</button>
-          <button id="navBtnSort" class="nav-button btn btn-dark">Sorting</button>
+          <button id="navBtnSort" class="nav-button btn btn-dark dropdown-toggle nav-link" data-toggle="dropdown">Sorting</button>
           <button id="navBtnUpdate" class="nav-button btn btn-dark">Update</button>
+          <!-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+          </a> -->
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <button id="rateUP" class="dropdown-item" href="#">Sort rate UP</button>
+            <button id="rateDown" class="dropdown-item" href="#">Sort rate DOWN</button>
+            <button id="yearUP" class="dropdown-item" href="#">From the newest</button>
+            <button id="yearDown" class="dropdown-item" href="#">From the oldes</button>
+          </div>
         </div>
         <!-- <label id="filmNameLabel">Film name:</label><input type="text" id="titleInput">
     <label id="productionYearLabel">Production year:</label><input id="yearInput" type="text">
